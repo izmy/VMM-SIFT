@@ -8,6 +8,8 @@ Instalace, pokud nechcete řešit knihovnu libpng:
 3. make LOCAL_LIBS=1
 4. profit!
 
+bzl sem tu 
+
 Příkaz pro porovnání:
 
 ./demo_ASIFT_src/demo_ASIFT input/adam1.png input/adam2.png output/adamImgOutVert.png output/adamImgOutHori.png output/adamMatching.txt output/adamKeys1.txt output/adamKeys2.txt
