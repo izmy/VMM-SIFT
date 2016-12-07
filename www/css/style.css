@@ -11,10 +11,24 @@ body {
 	font-size: 40px;
 }
 
+.main h2 {
+	font-size: 24px;
+	padding: 50px 0;
+	font-weight: normal;
+}
+
 .main input[type="file"] {
-	margin: 50px auto;
+	margin: 50px auto 0;
 	background: #00B4FF;
 	color: #fff;
 	border-radius: 5px;
 	padding: 20px;
+}
+
+.main input[type="submit"] {
+	margin-top: 50px;
+}
+
+.img-db img {
+	padding: 10px 0;
 }
