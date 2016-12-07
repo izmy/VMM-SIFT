@@ -1,3 +1,4 @@
 demo_ASIFT_src/*
 ASIFT/*
+!ASIFT/demo_ASIFT
 !ASIFT/demo_ASIFT.*
