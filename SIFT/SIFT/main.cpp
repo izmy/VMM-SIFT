@@ -6,7 +6,8 @@
 //  Copyright © 2016 Jaroslav Hrách. All rights reserved.
 //
 
-#include "cluster.hpp"
+#include "CCluster.hpp"
+#include "CPoint.hpp"
 
 #include <iostream>
 #include <cmath>
@@ -17,13 +18,13 @@ using namespace std;
 
 int main(int argc, const char * argv[]) {
     
-    double epsilon = 1.9;
+    
+    double epsilon = 5;
     int n, m;
     cin >> n >> m;
-    vector<cluster> clusters;
-    cluster tmpCluster;
+    vector<CCluster> clusters;
+    
     for (int i = 0; i < n; ++i){
-        
         
         //	nacteni dat
         double x, y, scale, rotation;
@@ -32,8 +33,9 @@ int main(int argc, const char * argv[]) {
         for (int j = 0; j < m; ++j)
             cin >> descriptors[j];
         //	zarazeni bodu do clusteru
-        point tmpPoint(x,y,scale,rotation,descriptors);
+        CPoint tmpPoint(x,y,scale,rotation,descriptors,m);
         unsigned int j;
+        //cout<<i<<endl;
         for (j = 0; j < clusters.size(); ++j){
             if(clusters[j].isClose(tmpPoint, epsilon)){
                 clusters[j].addPoint(tmpPoint);
@@ -41,19 +43,18 @@ int main(int argc, const char * argv[]) {
             }
         }
         if(j == clusters.size()){
+            CCluster tmpCluster;
             tmpCluster.addPoint(tmpPoint);
             clusters.insert(clusters.end(), tmpCluster);
         }
         
     }
     
-    
     //	hledani prostredniho prvku
+    cout<<clusters.size()<<" "<<n<<endl;
     for (unsigned int i = 0; i < clusters.size(); ++i){
-        cout<<"CLUSTER "<< i <<endl;
         clusters[i].findCentral();
     }
-    
     
     
     return 0;
