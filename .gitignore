@@ -1,4 +1,4 @@
-demo_ASIFT_src/*
-ASIFT/*
-!ASIFT/demo_ASIFT
-!ASIFT/demo_ASIFT.*
+src/ASIFT/io_png
+src/ASIFT/libMatch
+src/ASIFT/libNumerics
+src/ASIFT/third_party
