@@ -2,6 +2,8 @@
 #include <cmath>
 #include <fstream>
 #include <sstream>
+#include <string>
+#include <stdlib.h>
 
 #include "CPoint.h"
 
@@ -72,6 +74,15 @@ double SQFD (string file1, string file2){
     {
     	res += matrixB[i]  * WqWo[i].ratio;
     }
+
+    delete [] WqWo;
+
+    for (int i = 0; i < n+m; ++i) {
+        delete [] matrixA[i];
+    }
+    delete [] matrixA;
+    delete [] matrixB;
+
     return sqrt(abs(res));
 }
 
