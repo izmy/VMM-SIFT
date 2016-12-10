@@ -6,3 +6,4 @@ img-05.txt
 img-06.txt
 img-07.txt
 img-08.txt
+img-09.txt
