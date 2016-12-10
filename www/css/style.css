@@ -29,6 +29,10 @@ body {
 	margin-top: 50px;
 }
 
+.main select {
+	margin-top: 50px;
+}
+
 .img-db img {
 	padding: 10px 0;
 }
@@ -43,4 +47,9 @@ body {
 
 .img-result p {
 	text-align: left;
+}
+
+.img-result p.center {
+	text-align: center;
+	padding-top: 10px;
 }

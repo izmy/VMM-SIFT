@@ -47,21 +47,20 @@
 
               	//Cluster
               	$time_cluster_start = microtime(true);
-              	$out = shell_exec('./apps/Cluster uploads/' . $_POST['filename'] . '.txt uploads/' . $_POST['filename'] . 'c.txt 2>&1');
+              	$out = shell_exec('./apps/Cluster uploads/' . $_POST['filename'] . '.txt uploads/' . $_POST['filename'] . 'c.txt ' . $_POST['epsilon'] . ' 2>&1');
               	$time_cluster_end = microtime(true);
 
               	//SQFD
               	$time_sqfd_start = microtime(true);
-              	$out = shell_exec('./apps/SQFD uploads/' . $_POST['filename'] . 'c.txt db/db.txt db/eps-3/ 2>&1');
+              	$out = shell_exec('./apps/SQFD uploads/' . $_POST['filename'] . 'c.txt db/db.txt db/eps-' . $_POST['epsilon'] .'/ 2>&1');
               	$time_sqfd_end = microtime(true);
               	$image = preg_split("/[\s+;]/", $out);
 
               	echo '<h2>Vstupní obrázek</h2>';
               	echo '<img src="uploads/'.$_POST['filename'].'" alt="img" class="img-fluid img-input">';
+              	echo '<p class="center">Vybrané epsilon: <strong>' . $_POST['epsilon'] .'</strong></p>';
               	echo '<h2>Podobné obrázky</h2>';
               	echo '<div class="row">';
-
-              	$j = 1;
 
               	for ($i = 0; $i < count($image); $i ++) { 
               		if ($i % 2 == 0) {

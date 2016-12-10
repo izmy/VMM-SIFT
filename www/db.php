@@ -48,6 +48,9 @@
           <div class="col-md-4">
             <img src="img/img-08.png" alt="img" class="img-fluid">
           </div>
+          <div class="col-md-4">
+            <img src="img/img-09.png" alt="img" class="img-fluid">
+          </div>
         </div>
         <div class="row">
         </div>

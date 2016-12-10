@@ -71,6 +71,14 @@
 
               <form action="find-image.php" method="post">
                 <input type="hidden" name="filename" value='<?php echo $filename; ?>'>
+                Zvolit epsilon: 
+                <select name="epsilon" id="epsilon">
+                  <option value="3">3 (defaultní)</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
                 <p><input type="submit" name="submit" value="Najít podobný obrázek" class="btn btn-primary btn-lg" /></p>
               </form>
               <?php
