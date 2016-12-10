@@ -57,7 +57,7 @@
               	$image = preg_split("/[\s+;]/", $out);
 
               	echo '<h2>Vstupní obrázek</h2>';
-              	echo '<img src="uploads/'.$_POST['filename'].'" alt="img" class="img-fluid img-input">';
+              	echo '<img src="uploads/'.$_POST['filename'].'.png" alt="img" class="img-fluid img-input">';
               	echo '<p class="center">Vybrané epsilon: <strong>' . $_POST['epsilon'] .'</strong></p>';
               	echo '<h2>Podobné obrázky</h2>';
               	echo '<div class="row">';
