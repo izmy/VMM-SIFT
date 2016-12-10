@@ -1,19 +1,31 @@
 #include <iostream>
 #include <cmath>
 #include <fstream>
-#include <string>
-#include <cstring>
+#include <sstream>
+
+#include "CPoint.h"
 
 using namespace std;
 
-class point
-{
-public:
-	int x , y; 
-	double ratio;
-};	
+typedef struct {
+    string fileName;
+    double ratio;
+} IMAGES;
 
-double SQFD (char * file1, char * file2){
+int compare(const void * a, const void * b) {
+    IMAGES *imageA = (IMAGES *)a;
+    IMAGES *imageB = (IMAGES *)b;
+
+    if( imageA->ratio < imageB->ratio ) {
+        return -1;
+    } else if (imageA->ratio == imageB->ratio ) {
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
+double SQFD (string file1, string file2){
 
 	ifstream infile1(file1);
 	ifstream infile2(file2);
@@ -21,7 +33,7 @@ double SQFD (char * file1, char * file2){
 	int cnt, n, m, nn, mm;
 	infile1>>n>>nn;
 	infile2>>m>>mm;
-	point * WqWo = new point[n+m];
+	CPoint * WqWo = new CPoint[n+m];
 	for (int i = 0; i < n; ++i){
 		infile1 >> x >> y >> cnt;
 		WqWo[i].x = x;
@@ -62,52 +74,53 @@ double SQFD (char * file1, char * file2){
     }
     return sqrt(abs(res));
 }
-/**
- * Bublinkove razeni (od nejmensiho)
- * @param array pole k serazeni
- * @param size velikost pole
- */
-void bubbleSort(double * array, int size, int * zobrazeni){
-    for(int i = 0; i < size - 1; i++){
-        for(int j = 0; j < size - i - 1; j++){
-            if(array[j+1] < array[j]){
-                double tmp = array[j + 1];
-                array[j + 1] = array[j];
-                array[j] = tmp;
-                int tmp2 = zobrazeni[j + 1];
-                zobrazeni[j + 1] = zobrazeni[j];
-                zobrazeni[j] = tmp2	;
-            }   
-        }   
-    }   
-}    
-            
-int main(int argc,char **argv)
+
+int main(int argc, char **argv)
 {
-	if(argc<1)
-		return 1;
+    if ( argc != 3 ) {
+        std::cerr << "Usage: " << argv[0] << " keys-clustered.txt db.txt" << std::endl
+                  << "- keys-clustered.txt: clustered ASIFT keypoints" << std::endl
+                  << "- db.txt: database of all images (clustered ASIDT keypoints)" << std::endl;
+        return 1;
+    }
 
-	int imageCnt = 8;
-	string images[] = {"img-01.txt", "img-02.txt", "img-03.txt", "img-04.txt",
-		"img-05.txt", "img-06.txt", "img-07.txt", "img-08.txt"};
-	double res [imageCnt];
-	for (int i = 0; i < imageCnt; ++i){
-			char * cstr = new char [images[i].length()+1]; 	// Cecko zase neumi totalni picovinu
-  			strcpy (cstr, images[i].c_str());				// proto tahle prasarna
-		
-		res[i] = SQFD(argv[1], cstr);
-	}
-	int zobrazeni[] = {1,2,3,4,5,6,7,8};
-	bubbleSort(res,imageCnt, zobrazeni);
+    ifstream inputFile;
+    string fileDB = argv[2];
+    string line;
+    int fileTotal = 0;
 
-	for (int i = 0; i < imageCnt; ++i)
-	{
-		cout << images[zobrazeni[i]] <<endl;
-	}
+    inputFile.open( fileDB );
 
+    while ( getline(inputFile, line) ) {
+        ++fileTotal;
+    }
 
+    //cout << fileTotal << endl;
+
+    inputFile.clear();
+    inputFile.seekg(0, ios::beg);
+
+    IMAGES * images = new IMAGES[fileTotal];
+
+    for (int i = 0; i < fileTotal; ++i) {
+        getline(inputFile, line);
+        istringstream ss(line);
+        ss >> images[i].fileName;
+    }
+
+    for (int i = 0; i < fileTotal; ++i) {
+        images[i].ratio = SQFD(argv[1], images[i].fileName);
+    }
+
+    qsort(images, fileTotal, sizeof(IMAGES), compare);
+
+    for (int i = 0; i < fileTotal; ++i) {
+        cout << images[i].fileName;
+        printf (";%12.10f", images[i].ratio );
+        if (i < fileTotal - 1) cout << endl;
+    }
+
+    delete [] images;
 
 	return 0;
 }
-
-
