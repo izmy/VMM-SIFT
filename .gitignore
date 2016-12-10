@@ -2,3 +2,6 @@ src/ASIFT/io_png
 src/ASIFT/libMatch
 src/ASIFT/libNumerics
 src/ASIFT/third_party
+src/Cluster/.idea
+src/Cluster/cmake-build-debug
+src/Cluster/CMakeLists.txt

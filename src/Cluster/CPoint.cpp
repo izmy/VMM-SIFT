@@ -2,13 +2,9 @@
 //  CPoint.cpp
 //  SIFT
 //
-//  Created by Jaroslav Hrách on 08.12.16.
-//  Copyright © 2016 Jaroslav Hrách. All rights reserved.
-//
 
 #include <iostream>
 #include <cmath>
-#include <vector>
 
 #include "CPoint.hpp"
 

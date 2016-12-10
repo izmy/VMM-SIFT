@@ -2,9 +2,6 @@
 //  CCluster.hpp
 //  SIFT
 //
-//  Created by Jaroslav Hrách on 08.12.16.
-//  Copyright © 2016 Jaroslav Hrách. All rights reserved.
-//
 
 #ifndef CCluster_hpp
 #define CCluster_hpp
@@ -13,6 +10,7 @@
 #include <cmath>
 #include <vector>
 #include <stdio.h>
+#include <string>
 
 #include "CPoint.hpp"
 
@@ -28,7 +26,7 @@ public:
     bool isClose(CPoint p, double epsilon);
     void addPoint (CPoint p);
     void print ();
-    void findCentral();
+    std::string findCentral();
 };
 
 #endif /* CCluster_hpp */
