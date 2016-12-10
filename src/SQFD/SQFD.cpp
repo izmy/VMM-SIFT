@@ -77,10 +77,11 @@ double SQFD (string file1, string file2){
 
 int main(int argc, char **argv)
 {
-    if ( argc != 3 ) {
-        std::cerr << "Usage: " << argv[0] << " keys-clustered.txt db.txt" << std::endl
+    if ( argc != 4 ) {
+        std::cerr << "Usage: " << argv[0] << " keys-clustered.txt db.txt db/db-01/" << std::endl
                   << "- keys-clustered.txt: clustered ASIFT keypoints" << std::endl
-                  << "- db.txt: database of all images (clustered ASIDT keypoints)" << std::endl;
+                  << "- db.txt: database of all images (clustered ASIDT keypoints)" << std::endl
+                  << "- db/db-01/: directory where is the database" << std::endl;
         return 1;
     }
 
@@ -109,7 +110,7 @@ int main(int argc, char **argv)
     }
 
     for (int i = 0; i < fileTotal; ++i) {
-        images[i].ratio = SQFD(argv[1], "db/" + images[i].fileName);
+        images[i].ratio = SQFD(argv[1], argv[3] + images[i].fileName);
     }
 
     qsort(images, fileTotal, sizeof(IMAGES), compare);

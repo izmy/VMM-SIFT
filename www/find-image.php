@@ -52,7 +52,7 @@
 
               	//SQFD
               	$time_sqfd_start = microtime(true);
-              	$out = shell_exec('./apps/SQFD uploads/' . $_POST['filename'] . 'c.txt db/db.txt 2>&1');
+              	$out = shell_exec('./apps/SQFD uploads/' . $_POST['filename'] . 'c.txt db/db.txt db/eps-3/ 2>&1');
               	$time_sqfd_end = microtime(true);
               	$image = preg_split("/[\s+;]/", $out);
 
