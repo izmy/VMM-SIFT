@@ -109,7 +109,7 @@ int main(int argc, char **argv)
     }
 
     for (int i = 0; i < fileTotal; ++i) {
-        images[i].ratio = SQFD(argv[1], images[i].fileName);
+        images[i].ratio = SQFD(argv[1], "db/" + images[i].fileName);
     }
 
     qsort(images, fileTotal, sizeof(IMAGES), compare);
@@ -120,7 +120,7 @@ int main(int argc, char **argv)
         getline(ss,fileName,'.');
         cout << fileName << ".png";
         printf (";%12.10f", images[i].ratio );
-        if (i < fileTotal - 1) cout << endl;
+        if (i < fileTotal - 1) cout << "\n";
     }
 
     delete [] images;

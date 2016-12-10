@@ -32,3 +32,12 @@ body {
 .img-db img {
 	padding: 10px 0;
 }
+
+.img-result img {
+	padding: 10px 0;
+}
+
+.img-result p {
+	text-align: left;
+	padding-bottom: 20px;
+}
