@@ -27,7 +27,7 @@
               echo "<h2>Obrázek nebyl nalezen.</h2>";
             }
             else {
-            	$time_pre = microtime(true);
+            	$time_all_start = microtime(true);
 
             	// echo './apps/ASIFT ./uploads/'. $_POST['filename'] .'.png ./uploads/'.$_POST['filename'].'.txt 2>&1';
             	// echo "<br>";
@@ -35,19 +35,25 @@
             	// echo "<br>";
             	// echo './apps/SQFD uploads/' . $_POST['filename'] . 'c.txt db/db.txt 2>&1';
             	
-            	// //ASIFT
-              //	$out = shell_exec('./apps/ASIFT ./uploads/'. $_POST['filename'] .'.png ./uploads/'.$_POST['filename'].'.txt 2>&1');
+            	//ASIFT
+            	$time_asift_start = microtime(true);
+              	$out = shell_exec('./apps/ASIFT ./uploads/'. $_POST['filename'] .'.png ./uploads/'.$_POST['filename'].'.txt 2>&1');
+              	$time_asift_end = microtime(true);
               	// for ($i = 0; $i < strlen($out); $i++)
               	// {
                //  	if ( ord($out[$i]) == 10 ) echo "<br>";
                //  	echo $out[$i];
               	// }
 
-             //  	//Cluster
-             //  	$out = shell_exec('./apps/Cluster uploads/' . $_POST['filename'] . '.txt uploads/' . $_POST['filename'] . 'c.txt 2>&1');
+              	//Cluster
+              	$time_cluster_start = microtime(true);
+              	$out = shell_exec('./apps/Cluster uploads/' . $_POST['filename'] . '.txt uploads/' . $_POST['filename'] . 'c.txt 2>&1');
+              	$time_cluster_end = microtime(true);
 
               	//SQFD
+              	$time_sqfd_start = microtime(true);
               	$out = shell_exec('./apps/SQFD uploads/' . $_POST['filename'] . 'c.txt db/db.txt 2>&1');
+              	$time_sqfd_end = microtime(true);
               	$image = preg_split("/[\s+;]/", $out);
 
               	echo '<h2>Vstupní obrázek</h2>';
@@ -71,9 +77,17 @@
 	              	}
               	}
               	echo '</div>';
-              	$time_post = microtime(true);
-          		$exec_time = round($time_post - $time_pre, 2);
-          		echo '<p>Doba výpočtu: <strong>' . $exec_time . 's</strong></p>';
+              	$time_all_end = microtime(true);
+              	
+              	$exec_time_asift = round($time_asift_end - $time_asift_start, 2);
+              	$exec_time_cluster = round($time_cluster_end - $time_cluster_start, 2);
+              	$exec_time_sqfd = round($time_sqfd_end - $time_sqfd_start, 2);
+          		$exec_time_all = round($time_all_end - $time_all_start, 2);
+          		
+          		echo '<p>Doba výpočtu ASIFT: <strong>' . $exec_time_asift . 's</strong></p>';
+          		echo '<p>Doba výpočtu clusterů: <strong>' . $exec_time_cluster . 's</strong></p>';
+          		echo '<p>Doba výpočtu SQFD: <strong>' . $exec_time_sqfd . 's</strong></p>';
+          		echo '<p>Celková doba výpočtu: <strong>' . $exec_time_all . 's</strong></p>';
             }
           }
           else {

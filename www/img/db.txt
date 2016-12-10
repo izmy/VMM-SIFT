@@ -1,0 +1,2 @@
+db/img-01c.txt
+db/img-02c.txt
