@@ -115,7 +115,10 @@ int main(int argc, char **argv)
     qsort(images, fileTotal, sizeof(IMAGES), compare);
 
     for (int i = 0; i < fileTotal; ++i) {
-        cout << images[i].fileName;
+        istringstream ss(images[i].fileName);
+        string fileName;
+        getline(ss,fileName,'.');
+        cout << fileName << ".png";
         printf (";%12.10f", images[i].ratio );
         if (i < fileTotal - 1) cout << endl;
     }
