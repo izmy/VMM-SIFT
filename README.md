@@ -1,15 +1,12 @@
 # VMM-SIFT
 Image Retrieval - Podobnost obrázků (SIFT)
 
-Instalace, pokud nechcete řešit knihovnu libpng:
+Cílem projektu bylo vytvoření aplikace, která měří podobnost vstupního obrázku s databází obrázků na základě analýzy extrahovaných SIFT deskriptorů. 
 
-1. otevřít demo_ASIFT_src/io_png/libs/makefile.libpng
-2. upravit URL ke knihovně (LIBPNG_URL = http://downloads.sourceforge.net/project/libpng/libpng14/older-releases/1.4.3/libpng-1.4.3.tar.xz)
-3. make LOCAL_LIBS=1
-4. profit!
+Z extrahovaných deskriptorů jsme vytvořili clustery pomocí euklidovské vzdálenosti mezi nimi. V těchto clusterech jsme nalezli centrální prvek, který reprezentuje cluster.
 
-bzl sem tu 
+Porovnání obrázků bylo řešeno algoritmem SQFD, který porovná clustery dvou obrázků a vypočte podobnostní míru.
+Podle podobnostní míry vstupního obrázku oproti obrázkům z databáze seřadíme obrázky v databázi tak, aby nejpodobnější obrázky byli první.
 
-Příkaz pro porovnání:
+Výsledky, které dostáváme, jsou dobré díky omezení výběru hodnoty ε pouze na (1, 2, 3, 4, 5). Jiné hodnoty ε buď snižují kvalitu výsledku, nebo výrazně prodlužují dobu běhu.
 
-./demo_ASIFT_src/demo_ASIFT input/adam1.png input/adam2.png output/adamImgOutVert.png output/adamImgOutHori.png output/adamMatching.txt output/adamKeys1.txt output/adamKeys2.txt
